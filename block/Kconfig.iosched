@@ -136,6 +136,7 @@ config DEFAULT_IOSCHED
 	default "fiops" if DEFAULT_FIOPS
 	default "sio" if DEFAULT_SIO
 	default "noop" if DEFAULT_NOOP
+	default "zen" if DEFAULT_ZEN
 
 endmenu
 
