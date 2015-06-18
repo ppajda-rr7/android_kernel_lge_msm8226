@@ -131,6 +131,12 @@ config CPU_FREQ_DEFAULT_GOV_UBERDEMAND
 		driver. Fallback governor will be the performance governor.
 		uberdemand has built in a second phase profile.
 
+config CPU_FREQ_DEFAULT_GOV_IMPULSE
+	bool "impulse"
+	select CPU_FREQ_GOV_IMPULSE
+	help
+	  Use the CPUFreq governor 'impulse' as default.
+
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -257,6 +263,14 @@ config CPU_FREQ_GOV_UBERDEMAND
 		do fast frequency switching (i.e, very low latency frequency
 		transitions).
 		
+config CPU_FREQ_GOV_IMPULSE
+	tristate "'impulse' cpufreq policy governor"
+	help
+	  'impulse' - This driver adds a dynamic cpufreq policy governor
+	  designed for optimized balance between power and performance.
+
+	  If in doubt, say N.
+
 menu "x86 CPU frequency scaling drivers"
 depends on X86
 source "drivers/cpufreq/Kconfig.x86"
