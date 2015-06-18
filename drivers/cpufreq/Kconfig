@@ -136,6 +136,12 @@ config CPU_FREQ_DEFAULT_GOV_ZZMOOVE
 	  frequency lookup tables and optimized scaling triggers instead of
 	  % frequency steps to get smooth up/downscaling dependant on CPU load.
 
+config CPU_FREQ_DEFAULT_GOV_IMPULSE
+	bool "impulse"
+	select CPU_FREQ_GOV_IMPULSE
+	help
+	  Use the CPUFreq governor 'impulse' as default.
+
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -281,6 +287,14 @@ config CPU_FREQ_GOV_ZZMOOVE_DEFAULT_PROFILE
 	  Default zzmoove profile applied after turning on the governor.
 	  See cpufreq_zzmoove_profiles.h for proper options.
 	  If in doubt, say 0.
+
+config CPU_FREQ_GOV_IMPULSE
+	tristate "'impulse' cpufreq policy governor"
+	help
+	  'impulse' - This driver adds a dynamic cpufreq policy governor
+	  designed for optimized balance between power and performance.
+
+	  If in doubt, say N.
 
 menu "x86 CPU frequency scaling drivers"
 depends on X86
