@@ -3761,3 +3761,6 @@ CONFIG_DEFAULT_TCP_CONG="westwood"
 
 # Frandom
 CONFIG_FRANDOM=y
+
+# Underclock
+CONFIG_CPU_UNDERCLOCK=y
