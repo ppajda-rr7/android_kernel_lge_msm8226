@@ -1876,12 +1876,14 @@ config MSM_CPU_FREQ_SET_MIN_MAX
 config MSM_CPU_FREQ_MAX
 	int "Max CPU Frequency"
 	depends on MSM_CPU_FREQ_SET_MIN_MAX
-	default 1190400
+	default 1593600
+
 
 config MSM_CPU_FREQ_MIN
 	int "Min CPU Frequency"
 	depends on MSM_CPU_FREQ_SET_MIN_MAX
-	default 300000
+	default 96000
+
 
 endif # CPU_FREQ_MSM
 
@@ -1896,11 +1898,11 @@ config ZEN_DECISION
 	  ZenDecision is a "handler" to account for behavior caused by
 	  disabling some of these services.
 
-	  For example, If MPDecision is disabled and MSM-Thermal_Engine is 
+	  For example, If MPDecision is disabled and MSM-Thermal_Engine is
 	  enabled in the userspace. Situations where CPUs go offline but never
 	  come back online occur. ZenDecision handles the situation of CPUs
 	  never coming online when they are supposed.
-  
+
 	  ZenDecision ensures all CPUs are online when they are supposed to be by:
 	  - Enable all CPUs when screen comes on after wake_wait_delay
 	  - Ignore all CPU_UP operations when battery level is <= 15% to respect
