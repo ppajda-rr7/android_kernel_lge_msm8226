@@ -352,11 +352,14 @@ CC		= $(srctree)/scripts/gcc-wrapper.py $(REAL_CC)
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
 CFLAGS_MODULE   = -DMODULE -fno-pic \
+		  -ffast-math \
                   -marm -mfpu=neon-vfpv4 \
                   -mvectorize-with-neon-quad -munaligned-access
 AFLAGS_MODULE   =
 LDFLAGS_MODULE  =
 CFLAGS_KERNEL	= -mtune=cortex-a7 \
+		  -ffast-math \
+		  -ftree-slp-vectorize \
                   -marm -mfpu=neon-vfpv4 -mvectorize-with-neon-quad -munaligned-access
 AFLAGS_KERNEL	=
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
