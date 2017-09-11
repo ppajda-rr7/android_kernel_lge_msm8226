@@ -39,9 +39,9 @@
 
 #include <mach/board_lge.h>
 
-#define PN547_MAGIC 0xE9
+#define PN547_MAGIC	0xE9
 
-#define PN547_DRV_NAME  "pn547"
+#define PN547_DRV_NAME	"pn547"
 
 /*
  * pn547 power control via ioctl
@@ -49,9 +49,13 @@
  * pn547_SET_PWR(1): power on
  * pn547_SET_PWR(2): reset and power on with firmware download enabled
  */
-#define pn547_SET_PWR   _IOW(PN547_MAGIC, 0x01, unsigned int)
+#define pn547_SET_PWR	_IOW(PN547_MAGIC, 0x01, unsigned int)
 
 #define pn547_HW_REVISION _IOR(PN547_MAGIC, 0x02, unsigned int)
+
+#ifdef CONFIG_LGE_NFC_USE_PMIC
+#define pn547_CLKS_SET _IOW(PN547_MAGIC, 0x03, unsigned int)
+#endif
 
 struct pn547_i2c_platform_data {
     unsigned int sda_gpio;
@@ -70,8 +74,8 @@ struct pn547_dev {
     unsigned int        firm_gpio;
     unsigned int        irq_gpio;
 #ifdef CONFIG_LGE_NFC_USE_PMIC
-    struct clk          *clk_cont;
-    struct clk          *clk_pin;
+    struct clk			*clk_cont;
+    struct clk			*clk_pin;
 #endif
     bool            irq_enabled;
     spinlock_t      irq_enabled_lock;
