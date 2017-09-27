@@ -156,6 +156,9 @@ quiet_cmd_mkdir = MKDIR   $(patsubst $(objtree)/%,%,$@)
 quiet_cmd_ihex  = IHEX    $@
       cmd_ihex  = $(OBJCOPY) -Iihex -Obinary $< $@
 
+quiet_cmd_copy  = COPY    $@
+      cmd_copy = cp $(srctree)/$@ $@
+
 quiet_cmd_ihex2fw  = IHEX2FW $@
       cmd_ihex2fw  = $(objtree)/$(obj)/ihex2fw $< $@
 
@@ -218,6 +221,14 @@ $(patsubst %,$(obj)/%.gen.o, $(fw-external-y)): $(obj)/%.gen.o: $(fwdir)/%
 # where binaries are frowned upon. They are directly converted with objcopy.
 $(obj)/%: $(obj)/%.ihex | $(objtree)/$(obj)/$$(dir %)
 	$(call cmd,ihex)
+
+ifneq ($(objtree), $(srctree))
+$(obj)/%.fw: $(objtree)/$(obj)/$$(dir %.fw)
+	$(call cmd,copy)
+
+$(obj)/%.txt: $(objtree)/$(obj)/$$(dir %.txt)
+	$(call cmd,copy)
+endif
 
 # Don't depend on ihex2fw if we're installing and it already exists.
 # Putting it after | in the dependencies doesn't seem sufficient when
